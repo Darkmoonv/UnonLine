@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.ssm.dao.DingDanMapper">
+    <!--查找所有订单-->
+    <resultMap id="findAll" type="dingdan">
+        <id column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="orders_id" property="orders_id"/>
+        <collection property="userList" ofType="user">
+            <id column="user_id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </collection>
+        <collection property="ordersList" ofType="orders">
+            <id column="orders_id" property="id"/>
+            <result column="g_name" property="g_name"/>
+            <result column="price" property="price"/>
+            <result column="total" property="total"/>
+            <result column="describe" property="describe"/>
+        </collection>
+    </resultMap>
+    <select id="findAllDingDan" resultMap="findAll">
+        SELECT * FROM USER,orders,dingdan WHERE
+        user.`id`=dingdan.`user_id` AND orders.`id`=dingdan.`orders_id`
+    </select>
+    <insert id="addDingDan" parameterType="dingdan">
+        insert into dingdan values(#{id},#{user_id},#{orders_id},#{date})
+    </insert>
+</mapper>

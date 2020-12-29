@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--将domain包下的实类配置别名-->
+    <typeAliases>
+        <package name="com.zs.ssm.domain"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <!--将页面修正为合理数据-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+    <!--将总配置文件下的mapper下的各个配置文件添加进来-->
+    <mappers>
+        <mapper resource="com/zs/ssm/mapper/DingDanMapper.xml"/>
+        <mapper resource="com/zs/ssm/mapper/OrdersMapper.xml"/>
+        <mapper resource="com/zs/ssm/mapper/UserMapper.xml"/>
+        <mapper resource="com/zs/ssm/mapper/RoleMapper.xml"/>
+    </mappers>
+</configuration>
